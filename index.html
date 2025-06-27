@@ -28,7 +28,7 @@
       border-radius: 50%;
       transition: transform 1s ease;
     }
-    @keyframes spin {  from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .spin { animation: spin 1s ease-in-out; }
     /* Buttons */
     .btn {
@@ -52,10 +52,10 @@
       transform: translateY(-2px);
     }
     .btn-vinted {
-      background: #82D600; /* Vinted green */
+      background: #82B440; /* Vinted official green */
     }
     .btn-vinted:hover {
-      background: #6ab300;
+      background: #689337;
       transform: translateY(-2px);
     }
   </style>
@@ -64,16 +64,40 @@
   <div id="logo-container">
     <img id="logo" src="logo.png" alt="Bruschetta Logo">
   </div>
-  <a class="btn btn-instagram" href="https://instagram.com/tommaso.roomano" target="_blank">bruschetta su Instagram</a>
-  <a class="btn btn-vinted" href="https://www.vinted.it/member/andreeapio" target="_blank">bruschetta su Vinted</a>
+  <a class="btn btn-instagram" href="https://instagram.com/tuo_profilo" target="_blank">Seguici su Instagram</a>
+  <a class="btn btn-vinted" href="https://www.vinted.it/member/tuo_profilo" target="_blank">Seguici su Vinted</a>
 
   <script>
     const logo = document.getElementById('logo');
+    let clickCount = 0;
+    let resetTimeout;
+    const normalSrc = 'logo.png';
+    const dazedSrc = 'logo-dazed.png'; // carica la versione ‘stordita’
+
     document.getElementById('logo-container').addEventListener('click', () => {
+      // Spin animation
       logo.classList.add('spin');
       setTimeout(() => logo.classList.remove('spin'), 1000);
+
+      // Contatore click
+      clickCount++;
+
+      // Cambia immagine al secondo click
+      if (clickCount >= 2) {
+        logo.src = dazedSrc;
+      }
+
+      // Resetta dopo 10 secondi di inattività
+      clearTimeout(resetTimeout);
+      resetTimeout = setTimeout(() => {
+        clickCount = 0;
+        logo.src = normalSrc;
+      }, 10000);
     });
+
+    // Pre-carica immagine stordita
+    const imgPreload = new Image();
+    imgPreload.src = dazedSrc;
   </script>
 </body>
 </html>
-
