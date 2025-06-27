@@ -20,8 +20,6 @@
       overflow: visible;
     }
     #logo-container {
-      overflow: visible;
-      position: relative;
       width: 240px; height: 240px;
       cursor: pointer;
     }
@@ -30,32 +28,15 @@
       border-radius: 50%;
       transition: transform 1s ease;
     }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-    .spin {
-      animation: spin 1s ease-in-out;
-    }
-    #splash-text {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    #splash-text.visible { opacity: 1; }
-    /* SVG circular text */
-    #splash-svg { width: 100%; height: 100%; }
-
-    /* Instagram Button */
-    #instagram-link {
-      margin-top: 24px;
+    @keyframes spin {  from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .spin { animation: spin 1s ease-in-out; }
+    /* Buttons */
+    .btn {
+      margin-top: 20px;
       width: 220px;
       text-decoration: none;
       text-align: center;
       color: #ffffff;
-      background: #256C6C;       /* colore simile allo sfondo del logo */
       padding: 12px 0;
       border-radius: 30px;
       font-size: 16px;
@@ -63,8 +44,18 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       transition: background 0.3s, transform 0.2s;
     }
-    #instagram-link:hover {
+    .btn-instagram {
+      background: #256C6C;
+    }
+    .btn-instagram:hover {
       background: #1f5a5a;
+      transform: translateY(-2px);
+    }
+    .btn-vinted {
+      background: #82D600; /* Vinted green */
+    }
+    .btn-vinted:hover {
+      background: #6ab300;
       transform: translateY(-2px);
     }
   </style>
@@ -72,31 +63,17 @@
 <body>
   <div id="logo-container">
     <img id="logo" src="logo.png" alt="Bruschetta Logo">
-    <div id="splash-text">
-      <svg id="splash-svg" viewBox="0 0 240 240">
-        <defs>
-          <!-- Solo arco superiore -->
-          <path id="topPath" d="M120,120 m-120,0 a120,120 0 0,1 240,0"/> />
-        </defs>
-        <text fill="#FF8C00" font-size="18" font-weight="600">
-          <textPath href="#topPath" startOffset="50%" text-anchor="middle" dy="-10">try to spin me!</textPath>
-        </text>
-      </svg>
-    </div>
   </div>
-  <a id="instagram-link" href="https://instagram.com/tuo_profilo" target="_blank">Seguici su Instagram</a>
+  <a class="btn btn-instagram" href="https://instagram.com/tommaso.roomano" target="_blank">bruschetta su Instagram</a>
+  <a class="btn btn-vinted" href="https://www.vinted.it/member/andreeapio" target="_blank">bruschetta su Vinted</a>
 
   <script>
-    const container = document.getElementById('logo-container');
     const logo = document.getElementById('logo');
-    const splash = document.getElementById('splash-text');
-    container.addEventListener('click', () => {
-      splash.classList.add('visible');
+    document.getElementById('logo-container').addEventListener('click', () => {
       logo.classList.add('spin');
       setTimeout(() => logo.classList.remove('spin'), 1000);
     });
   </script>
 </body>
 </html>
-
 
