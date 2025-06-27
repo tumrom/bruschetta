@@ -74,10 +74,11 @@
     <div id="splash-text">
       <svg id="splash-svg" viewBox="0 0 240 240">
         <defs>
-          <path id="circlePath" d="M120,120 m-100,0 a100,100 0 1,1 200,0 a100,100 0 1,1 -200,0" />
+          <!-- Solo arco superiore -->
+          <path id="topPath" d="M120,120 m-100,0 a100,100 0 0,1 200,0" />
         </defs>
         <text fill="#FF8C00" font-size="18" font-weight="600">
-          <textPath href="#circlePath" startOffset="50%">try to spin me! • try to spin me!</textPath>
+          <textPath href="#topPath" startOffset="50%" text-anchor="middle">try to spin me!</textPath>
         </text>
       </svg>
     </div>
@@ -96,3 +97,4 @@
   </script>
 </body>
 </html>
+
