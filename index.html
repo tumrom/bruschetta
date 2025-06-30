@@ -2,102 +2,97 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Bruschetta Official</title>
-  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* Reset */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin:0; padding:0 }
     html, body {
-      width: 100%; height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: #f0f0f0;
-      font-family: 'Poppins', sans-serif;
-      overflow: visible;
+      width:100%; height:100%;
+      display:flex; flex-direction:column;
+      justify-content:center; align-items:center;
+      background:#f0f0f0;
+      font-family:'Poppins',sans-serif;
+      overflow:visible;
     }
     #logo-container {
-      width: 240px; height: 240px;
-      cursor: pointer;
+      width:240px; height:240px;
+      cursor:pointer;
+      margin-bottom:24px;
     }
     #logo {
-      width: 100%; height: 100%;
-      border-radius: 50%;
-      transition: transform 1s ease;
+      width:100%; height:100%;
+      border-radius:50%;
+      transition:transform 1s;
     }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    .spin { animation: spin 1s ease-in-out; }
-    /* Buttons */
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    .spin { animation:spin 1s ease-in-out }
+
     .btn {
-      margin-top: 20px;
-      width: 220px;
-      text-decoration: none;
-      text-align: center;
-      color: #ffffff;
-      padding: 12px 0;
-      border-radius: 30px;
-      font-size: 16px;
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      transition: background 0.3s, transform 0.2s;
+      width:220px; padding:12px 0;
+      margin:8px 0;
+      text-decoration:none;
+      text-align:center;
+      color:#fff;
+      font-weight:600;
+      border-radius:30px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      transition:transform .2s;
     }
     .btn-instagram {
-      background: #256C6C;
+      background:#256C6C;
     }
-    .btn-instagram:hover {
-      background: #1f5a5a;
-      transform: translateY(-2px);
-    }
+    .btn-instagram:hover { transform:translateY(-2px) }
     .btn-vinted {
-      background: #82B440; /* Vinted official green */
+      background:#82B440;
     }
-    .btn-vinted:hover {
-      background: #689337;
-      transform: translateY(-2px);
-    }
+    .btn-vinted:hover { transform:translateY(-2px) }
   </style>
 </head>
 <body>
+
   <div id="logo-container">
     <img id="logo" src="logo.png" alt="Bruschetta Logo">
   </div>
-  <a class="btn btn-instagram" href="https://instagram.com/tuo_profilo" target="_blank">Seguici su Instagram</a>
-  <a class="btn btn-vinted" href="https://www.vinted.it/member/tuo_profilo" target="_blank">Seguici su Vinted</a>
+
+  <a class="btn btn-instagram" href="https://instagram.com/tuo_profilo" target="_blank">
+    Seguici su Instagram
+  </a>
+  <a class="btn btn-vinted" href="https://www.vinted.it/member/tuo_profilo" target="_blank">
+    Seguici su Vinted
+  </a>
 
   <script>
     const logo = document.getElementById('logo');
-    let clickCount = 0;
-    let resetTimeout;
+    let clicks = 0;
+    let timeoutId;
     const normalSrc = 'logo.png';
-    const dazedSrc = 'logo-dazed.png'; // carica la versione ‘stordita’
+    const dazedSrc  = 'logo-dazed.png';
+
+    function resetLogo() {
+      clicks = 0;
+      logo.src = normalSrc;
+    }
 
     document.getElementById('logo-container').addEventListener('click', () => {
-      // Spin animation
+      // Spin
       logo.classList.add('spin');
       setTimeout(() => logo.classList.remove('spin'), 1000);
 
-      // Contatore click
-      clickCount++;
-
-      // Cambia immagine al secondo click
-      if (clickCount >= 2) {
+      // Count
+      clicks++;
+      if (clicks >= 2) {
         logo.src = dazedSrc;
       }
 
-      // Resetta dopo 10 secondi di inattività
-      clearTimeout(resetTimeout);
-      resetTimeout = setTimeout(() => {
-        clickCount = 0;
-        logo.src = normalSrc;
-      }, 10000);
+      // Reset after 10s inactivity
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(resetLogo, 10000);
     });
 
-    // Pre-carica immagine stordita
-    const imgPreload = new Image();
-    imgPreload.src = dazedSrc;
+    // Preload dazed image
+    new Image().src = dazedSrc;
   </script>
+
 </body>
 </html>
